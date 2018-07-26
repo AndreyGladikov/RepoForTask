@@ -17,44 +17,33 @@ namespace PatternsVol2.Pages
 
         private IWebDriver driver;
 
+        [FindsBy(How = How.XPath, Using = "//a[@data-target-popup='authorize-form']")]
+        private IWebElement LoginPopUp;
+        [FindsBy(How = How.XPath, Using = "//div[@class='i-holder']//input[@type='text']")]
+        private IWebElement LoginField;
+        [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
+        private IWebElement PasswordField;
+        [FindsBy(How = How.XPath, Using = "//input[@value='Войти']")]
+        private IWebElement LoginButton;
+
         public LoginPage(IWebDriver driver)
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.XPath, Using = "//a[@data-target-popup='authorize-form']")]
-        public IWebElement LoginPopUp { get; set; }
-        [FindsBy(How = How.XPath, Using = "//div[@class='i-holder']//input[@type='text']")]
-        public IWebElement LoginField { get; set; }
-        [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
-        public IWebElement PasswordField { get; set; }
-        [FindsBy(How = How.XPath, Using = "//input[@value='Войти']")]
-        public IWebElement LoginButton { get; set; }
-
-        public void goToPage()
+        public void Login(string username, string password)
         {
             driver.Navigate().GoToUrl(MailURL);
-        }
-
-        public void clickOnLoginPopUp()
-        {
             LoginPopUp.Click();
-        }
-
-        public void enterUserName(string username)
-        {
             LoginField.SendKeys(username);
-        }
-
-        public void enterPassword(string password)
-        {
             PasswordField.SendKeys(password);
+            LoginButton.Click();
         }
 
-        public void clickOnLoginButton()
+        public bool Check()
         {
-            LoginButton.Click();
+            return LoginPopUp.Displayed;
         }
     }
 }

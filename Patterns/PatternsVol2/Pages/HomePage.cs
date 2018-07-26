@@ -10,29 +10,27 @@ namespace PatternsVol2.Pages
 {
     class HomePage
     {
-        private IWebDriver driver;
-
-        public HomePage(IWebDriver driver)
-        {
-            this.driver = driver;
-            PageFactory.InitElements(driver, this);
-        }
-
         public const string UName = "Test Auto";
 
         [FindsBy(How = How.XPath, Using = "//span[@class='uname']")]
-        public IWebElement UserName;
+        private IWebElement UserName;
         [FindsBy(How = How.XPath, Using = "//a[@class='button wide auth__reg']")]
-        public IWebElement LogOutBTN { get; set; }
-
-        public void clickOnUserName()
+        private IWebElement LogOutBTN;
+       
+        public HomePage(IWebDriver driver)
         {
-            UserName.Click();
+            PageFactory.InitElements(driver, this);
         }
 
-        public void clickOnLogOutBTN()
+        public void LogOut()
         {
+            UserName.Click();
             LogOutBTN.Click();
+        }
+
+        public string getText()
+        {
+            return UserName.Text;
         }
     }
 }

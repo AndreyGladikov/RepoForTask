@@ -23,31 +23,21 @@ namespace PatternsVol2
         [TestCategory("Chrome")]
         public void MailLogin()
         {
-            LoginPage login = new LoginPage(driver);
-            login.goToPage();
-            login.clickOnLoginPopUp();
-            login.enterUserName("AutoTest92");
-            login.enterPassword("Inq2020327");
-            login.clickOnLoginButton();
-            HomePage home = new HomePage(driver);
-            string CurText = home.UserName.Text;
-            Assert.IsTrue(CurText.Contains(HomePage.UName), "You did not log in ");
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.Login("AutoTest92","Inq2020327");
+            HomePage homePage = new HomePage(driver);
+            Assert.IsTrue(homePage.getText().Contains(HomePage.UName), "You did not logged in ");
         }
 
         [TestMethod]
         [TestCategory("Chrome")]
         public void MailLogOut()
         {
-            LoginPage login = new LoginPage(driver);
-            login.goToPage();
-            login.clickOnLoginPopUp();
-            login.enterUserName("AutoTest92");
-            login.enterPassword("Inq2020327");
-            login.clickOnLoginButton();
-            HomePage home = new HomePage(driver);
-            home.clickOnUserName();
-            home.clickOnLogOutBTN();
-            Assert.IsTrue(login.LoginPopUp.Displayed);
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.Login("AutoTest92", "Inq2020327");
+            HomePage homePage = new HomePage(driver);
+            homePage.LogOut();
+            Assert.IsTrue(loginPage.Check(), "You are not looged out");
         }
 
         [TestCleanup]

@@ -10,7 +10,6 @@ namespace PatternsVol2.Pages
 {
     class LoginPage
     {
-        public const string MailLogURL = "https://www.tut.by/?trnd=47188";
         public const string MailURL = "https://www.tut.by/";
         public const string MailLog = "AutoTest92";
         public const string MailPWD = "Inq2020327";
@@ -41,7 +40,7 @@ namespace PatternsVol2.Pages
             LoginButton.Click();
         }
 
-        public bool Check()
+        public bool CheckVisibility()
         {
             return LoginPopUp.Displayed;
         }

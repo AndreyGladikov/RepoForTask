@@ -28,7 +28,7 @@ namespace PatternsVol2.Pages
             LogOutBTN.Click();
         }
 
-        public string getText()
+        public string getTextOfUserName()
         {
             return UserName.Text;
         }

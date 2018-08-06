@@ -11,7 +11,7 @@ namespace PatternsVol2
     [TestClass]
     public class PatternTests
     {
-        private static IWebDriver driver;
+        private IWebDriver driver;
 
         [TestInitialize]
         public void initialize()
@@ -24,9 +24,9 @@ namespace PatternsVol2
         public void MailLogin()
         {
             LoginPage loginPage = new LoginPage(driver);
-            loginPage.Login("AutoTest92","Inq2020327");
+            loginPage.Login(LoginPage.MailLog,LoginPage.MailPWD);
             HomePage homePage = new HomePage(driver);
-            Assert.IsTrue(homePage.getText().Contains(HomePage.UName), "You did not logged in ");
+            Assert.AreEqual(homePage.getTextOfUserName(),HomePage.UName, "You did not logged in ");
         }
 
         [TestMethod]
@@ -34,10 +34,10 @@ namespace PatternsVol2
         public void MailLogOut()
         {
             LoginPage loginPage = new LoginPage(driver);
-            loginPage.Login("AutoTest92", "Inq2020327");
+            loginPage.Login(LoginPage.MailLog, LoginPage.MailPWD);
             HomePage homePage = new HomePage(driver);
             homePage.LogOut();
-            Assert.IsTrue(loginPage.Check(), "You are not looged out");
+            Assert.IsTrue(loginPage.CheckVisibility(), "You are not looged out");
         }
 
         [TestCleanup]

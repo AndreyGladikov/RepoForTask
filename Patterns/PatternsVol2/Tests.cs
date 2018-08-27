@@ -11,6 +11,11 @@ namespace PatternsVol2
     [TestClass]
     public class PatternTests
     {
+        public const string MailURL = "https://www.tut.by/";
+        public const string MailLog = "AutoTest92";
+        public const string MailPWD = "Inq2020327";
+        public const string UName = "Test Auto";
+
         private IWebDriver driver;
 
         [TestInitialize]
@@ -24,9 +29,9 @@ namespace PatternsVol2
         public void MailLogin()
         {
             LoginPage loginPage = new LoginPage(driver);
-            loginPage.Login(LoginPage.MailLog,LoginPage.MailPWD);
+            loginPage.Login(MailURL,MailLog,MailPWD);
             HomePage homePage = new HomePage(driver);
-            Assert.AreEqual(homePage.getTextOfUserName(),HomePage.UName, "You did not logged in ");
+            Assert.AreEqual(homePage.getTextOfUserName(),UName, "You did not logged in ");
         }
 
         [TestMethod]
@@ -34,10 +39,10 @@ namespace PatternsVol2
         public void MailLogOut()
         {
             LoginPage loginPage = new LoginPage(driver);
-            loginPage.Login(LoginPage.MailLog, LoginPage.MailPWD);
+            loginPage.Login(MailURL, MailLog, MailPWD);
             HomePage homePage = new HomePage(driver);
             homePage.LogOut();
-            Assert.IsTrue(loginPage.CheckVisibility(), "You are not looged out");
+            Assert.IsTrue(loginPage.isDisplayed(), "You are not looged out");
         }
 
         [TestCleanup]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PatternsVol2;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -10,9 +11,9 @@ namespace PatternsVol2.Pages
 {
     class LoginPage
     {
-        public const string MailURL = "https://www.tut.by/";
-        public const string MailLog = "AutoTest92";
-        public const string MailPWD = "Inq2020327";
+        //public const string MailURL = "https://www.tut.by/";
+        //public const string MailLog = "AutoTest92";
+        //public const string MailPWD = "Inq2020327";
 
         private IWebDriver driver;
 
@@ -31,16 +32,16 @@ namespace PatternsVol2.Pages
             PageFactory.InitElements(driver, this);
         }
 
-        public void Login(string username, string password)
+        public void Login(string Url, string username, string password)
         {
-            driver.Navigate().GoToUrl(MailURL);
+            driver.Navigate().GoToUrl(Url);
             LoginPopUp.Click();
             LoginField.SendKeys(username);
             PasswordField.SendKeys(password);
             LoginButton.Click();
         }
 
-        public bool CheckVisibility()
+        public bool isDisplayed()
         {
             return LoginPopUp.Displayed;
         }

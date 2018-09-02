@@ -11,7 +11,12 @@ namespace PatternsVol2
     [TestClass]
     public class PatternTests
     {
-        private static IWebDriver driver;
+        public const string MailURL = "https://www.tut.by/";
+        public const string MailLog = "AutoTest92";
+        public const string MailPWD = "Inq2020327";
+        public const string UName = "Test Auto";
+
+        private IWebDriver driver;
 
         [TestInitialize]
         public void initialize()
@@ -23,31 +28,21 @@ namespace PatternsVol2
         [TestCategory("Chrome")]
         public void MailLogin()
         {
-            LoginPage login = new LoginPage(driver);
-            login.goToPage();
-            login.clickOnLoginPopUp();
-            login.enterUserName("AutoTest92");
-            login.enterPassword("Inq2020327");
-            login.clickOnLoginButton();
-            HomePage home = new HomePage(driver);
-            string CurText = home.UserName.Text;
-            Assert.IsTrue(CurText.Contains(HomePage.UName), "You did not log in ");
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.Login(MailURL,MailLog,MailPWD);
+            HomePage homePage = new HomePage(driver);
+            Assert.AreEqual(homePage.getTextOfUserName(),UName, "You did not logged in ");
         }
 
         [TestMethod]
         [TestCategory("Chrome")]
         public void MailLogOut()
         {
-            LoginPage login = new LoginPage(driver);
-            login.goToPage();
-            login.clickOnLoginPopUp();
-            login.enterUserName("AutoTest92");
-            login.enterPassword("Inq2020327");
-            login.clickOnLoginButton();
-            HomePage home = new HomePage(driver);
-            home.clickOnUserName();
-            home.clickOnLogOutBTN();
-            Assert.IsTrue(login.LoginPopUp.Displayed);
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.Login(MailURL, MailLog, MailPWD);
+            HomePage homePage = new HomePage(driver);
+            homePage.LogOut();
+            Assert.IsTrue(loginPage.isDisplayed(), "You are not looged out");
         }
 
         [TestCleanup]

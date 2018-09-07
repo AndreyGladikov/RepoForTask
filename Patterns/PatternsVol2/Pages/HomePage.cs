@@ -10,8 +10,6 @@ namespace PatternsVol2.Pages
 {
     class HomePage
     {
-       // public const string UName = "Test Auto";
-
         [FindsBy(How = How.XPath, Using = "//span[@class='uname']")]
         private IWebElement UserName;
         [FindsBy(How = How.XPath, Using = "//a[@class='button wide auth__reg']")]

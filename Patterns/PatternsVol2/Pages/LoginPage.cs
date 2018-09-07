@@ -11,10 +11,6 @@ namespace PatternsVol2.Pages
 {
     class LoginPage
     {
-        //public const string MailURL = "https://www.tut.by/";
-        //public const string MailLog = "AutoTest92";
-        //public const string MailPWD = "Inq2020327";
-
         private IWebDriver driver;
 
         [FindsBy(How = How.XPath, Using = "//a[@data-target-popup='authorize-form']")]
@@ -47,4 +43,3 @@ namespace PatternsVol2.Pages
         }
     }
 }
-

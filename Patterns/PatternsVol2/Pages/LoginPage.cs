@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PatternsVol2;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -10,12 +11,16 @@ namespace PatternsVol2.Pages
 {
     class LoginPage
     {
-        public const string MailLogURL = "https://www.tut.by/?trnd=47188";
-        public const string MailURL = "https://www.tut.by/";
-        public const string MailLog = "AutoTest92";
-        public const string MailPWD = "Inq2020327";
-
         private IWebDriver driver;
+
+        [FindsBy(How = How.XPath, Using = "//a[@data-target-popup='authorize-form']")]
+        private IWebElement LoginPopUp;
+        [FindsBy(How = How.XPath, Using = "//div[@class='i-holder']//input[@type='text']")]
+        private IWebElement LoginField;
+        [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
+        private IWebElement PasswordField;
+        [FindsBy(How = How.XPath, Using = "//input[@value='Войти']")]
+        private IWebElement LoginButton;
 
         public LoginPage(IWebDriver driver)
         {
@@ -23,39 +28,18 @@ namespace PatternsVol2.Pages
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.XPath, Using = "//a[@data-target-popup='authorize-form']")]
-        public IWebElement LoginPopUp { get; set; }
-        [FindsBy(How = How.XPath, Using = "//div[@class='i-holder']//input[@type='text']")]
-        public IWebElement LoginField { get; set; }
-        [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
-        public IWebElement PasswordField { get; set; }
-        [FindsBy(How = How.XPath, Using = "//input[@value='Войти']")]
-        public IWebElement LoginButton { get; set; }
-
-        public void goToPage()
+        public void Login(string Url, string username, string password)
         {
-            driver.Navigate().GoToUrl(MailURL);
-        }
-
-        public void clickOnLoginPopUp()
-        {
+            driver.Navigate().GoToUrl(Url);
             LoginPopUp.Click();
-        }
-
-        public void enterUserName(string username)
-        {
             LoginField.SendKeys(username);
-        }
-
-        public void enterPassword(string password)
-        {
             PasswordField.SendKeys(password);
+            LoginButton.Click();
         }
 
-        public void clickOnLoginButton()
+        public bool isDisplayed()
         {
-            LoginButton.Click();
+            return LoginPopUp.Displayed;
         }
     }
 }
-
